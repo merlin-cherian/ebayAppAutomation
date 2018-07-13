@@ -26,6 +26,7 @@ public class setCapabilities {
 		//Specify appPackage and appActivity of the app to be tested
 		capabilities.setCapability("appPackage",appPackage );
 		capabilities.setCapability("appActivity",appActivity );
+		
 		//Default time the device waits for new command
 		capabilities.setCapability("newCommandTimeout", "60");
 		appDriver =new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);

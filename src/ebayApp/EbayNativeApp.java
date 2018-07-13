@@ -32,7 +32,27 @@ public class EbayNativeApp {
 		app.findElementById(page.getSignInImage());
 		app.findElementById(page.getSearchField()).click();
 		app.findElementById(page.getSearchTextBox()).sendKeys(searchText);
-		app.findElementById(page.getSearchButton()).click();	
+		app.findElementById(page.getSearchButton()).click();
+		
+		//scroll down
+		app.swipe(0, 30, 0, 60, 2000);
+		
+		//getting info on product search screen
+		ProductScreenObjects pscr = new ProductScreenObjects();
+		String name = app.findElementById(pscr.getNameID()).getText();
+		pscr.setName(name);
+		
+		String price = app.findElementById(pscr.getPriceID()).getText();
+		pscr.setName(price);
+		
+		String desc = app.findElementById(pscr.getDescID()).getText();
+		pscr.setName(desc);
+		
+		//Add to cart
+		
+		//getting info on checkout screen
+		
+		
 	}
 	
 	@AfterClass
