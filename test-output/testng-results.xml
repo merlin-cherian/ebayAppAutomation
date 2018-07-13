@@ -2,32 +2,35 @@
 <testng-results skipped="1" failed="0" ignored="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1572" started-at="2018-07-11T09:32:29Z" finished-at="2018-07-11T09:32:30Z">
+  <suite name="Default suite" duration-ms="62810" started-at="2018-07-13T13:05:53Z" finished-at="2018-07-13T13:06:55Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="1572" started-at="2018-07-11T09:32:29Z" finished-at="2018-07-11T09:32:30Z">
+    <test name="Default test" duration-ms="62810" started-at="2018-07-13T13:05:53Z" finished-at="2018-07-13T13:06:55Z">
       <class name="ebayApp.EbayNativeApp">
-        <test-method status="FAIL" signature="Launchapp()[pri:0, instance:ebayApp.EbayNativeApp@19651f3]" name="Launchapp" is-config="true" duration-ms="1509" started-at="2018-07-11T09:32:29Z" finished-at="2018-07-11T09:32:30Z">
-          <exception class="org.openqa.selenium.remote.UnreachableBrowserException">
+        <test-method status="FAIL" signature="Launchapp()[pri:0, instance:ebayApp.EbayNativeApp@57cd70]" name="Launchapp" is-config="true" duration-ms="61766" started-at="2018-07-13T13:05:53Z" finished-at="2018-07-13T13:06:54Z">
+          <exception class="org.openqa.selenium.SessionNotCreatedException">
             <message>
-              <![CDATA[Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure.
+              <![CDATA[Unable to create new remote session. desired capabilities = Capabilities [{app=D:\Appium_Req\eBay.apk, appPackage=com.ebay.mobile, appActivity=.activities.eBay, newCommandTimeout=60, platformName=Android, version=5.5.1, deviceName=emulator-5554, platform=WINDOWS}], required capabilities = Capabilities [{}]
 Build info: version: 'unknown', revision: '1969d75', time: '2016-10-18 09:43:45 -0700'
-System info: host: 'TVMATP95695L', ip: '10.110.78.110', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_111'
+System info: host: 'TVMATP95695L', ip: '192.168.8.101', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_111'
 Driver info: driver.version: AndroidDriver]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.remote.UnreachableBrowserException: Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure.
+              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Unable to create new remote session. desired capabilities = Capabilities [{app=D:\Appium_Req\eBay.apk, appPackage=com.ebay.mobile, appActivity=.activities.eBay, newCommandTimeout=60, platformName=Android, version=5.5.1, deviceName=emulator-5554, platform=WINDOWS}], required capabilities = Capabilities [{}]
 Build info: version: 'unknown', revision: '1969d75', time: '2016-10-18 09:43:45 -0700'
-System info: host: 'TVMATP95695L', ip: '10.110.78.110', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_111'
+System info: host: 'TVMATP95695L', ip: '192.168.8.101', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_111'
 Driver info: driver.version: AndroidDriver
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:622)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:91)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:141)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
 at io.appium.java_client.AppiumDriver.execute(AppiumDriver.java:180)
 at org.openqa.selenium.remote.RemoteWebDriver.startSession(RemoteWebDriver.java:241)
 at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:128)
 at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:155)
 at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:109)
 at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:39)
-at ebayApp.EbayNativeApp.Launchapp(EbayNativeApp.java:38)
+at ebayApp.setCapabilities.setSessionCapabilities(setCapabilities.java:31)
+at ebayApp.EbayNativeApp.Launchapp(EbayNativeApp.java:22)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -54,63 +57,36 @@ at org.testng.TestNG.run(TestNG.java:1017)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: org.apache.http.conn.HttpHostConnectException: Connect to 127.0.0.1:4723 [/127.0.0.1] failed: Connection refused: connect
-at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:158)
-at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:353)
-at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:380)
-at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236)
-at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:184)
-at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:88)
-at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110)
-at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184)
-at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:71)
-at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-at org.openqa.selenium.remote.internal.ApacheHttpClient.fallBackExecute(ApacheHttpClient.java:142)
-at org.openqa.selenium.remote.internal.ApacheHttpClient.execute(ApacheHttpClient.java:88)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:108)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:64)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:141)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
-... 33 more
-Caused by: java.net.ConnectException: Connection refused: connect
-at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
-at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
-at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
-at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
-at java.net.PlainSocketImpl.connect(Unknown Source)
-at java.net.SocksSocketImpl.connect(Unknown Source)
-at java.net.Socket.connect(Unknown Source)
-at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:74)
-at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:141)
-... 48 more
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.remote.UnreachableBrowserException -->
+          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Launchapp -->
-        <test-method status="SKIP" signature="Login()[pri:0, instance:ebayApp.EbayNativeApp@19651f3]" name="Login" duration-ms="0" started-at="2018-07-11T09:32:30Z" finished-at="2018-07-11T09:32:30Z">
-          <exception class="org.openqa.selenium.remote.UnreachableBrowserException">
+        <test-method status="SKIP" signature="Login()[pri:0, instance:ebayApp.EbayNativeApp@57cd70]" name="Login" duration-ms="0" started-at="2018-07-13T13:06:55Z" finished-at="2018-07-13T13:06:55Z">
+          <exception class="org.openqa.selenium.SessionNotCreatedException">
             <message>
-              <![CDATA[Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure.
+              <![CDATA[Unable to create new remote session. desired capabilities = Capabilities [{app=D:\Appium_Req\eBay.apk, appPackage=com.ebay.mobile, appActivity=.activities.eBay, newCommandTimeout=60, platformName=Android, version=5.5.1, deviceName=emulator-5554, platform=WINDOWS}], required capabilities = Capabilities [{}]
 Build info: version: 'unknown', revision: '1969d75', time: '2016-10-18 09:43:45 -0700'
-System info: host: 'TVMATP95695L', ip: '10.110.78.110', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_111'
+System info: host: 'TVMATP95695L', ip: '192.168.8.101', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_111'
 Driver info: driver.version: AndroidDriver]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.remote.UnreachableBrowserException: Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure.
+              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Unable to create new remote session. desired capabilities = Capabilities [{app=D:\Appium_Req\eBay.apk, appPackage=com.ebay.mobile, appActivity=.activities.eBay, newCommandTimeout=60, platformName=Android, version=5.5.1, deviceName=emulator-5554, platform=WINDOWS}], required capabilities = Capabilities [{}]
 Build info: version: 'unknown', revision: '1969d75', time: '2016-10-18 09:43:45 -0700'
-System info: host: 'TVMATP95695L', ip: '10.110.78.110', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_111'
+System info: host: 'TVMATP95695L', ip: '192.168.8.101', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_111'
 Driver info: driver.version: AndroidDriver
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:622)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:91)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:141)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
 at io.appium.java_client.AppiumDriver.execute(AppiumDriver.java:180)
 at org.openqa.selenium.remote.RemoteWebDriver.startSession(RemoteWebDriver.java:241)
 at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:128)
 at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:155)
 at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:109)
 at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:39)
-at ebayApp.EbayNativeApp.Launchapp(EbayNativeApp.java:38)
+at ebayApp.setCapabilities.setSessionCapabilities(setCapabilities.java:31)
+at ebayApp.EbayNativeApp.Launchapp(EbayNativeApp.java:22)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -137,43 +113,13 @@ at org.testng.TestNG.run(TestNG.java:1017)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: org.apache.http.conn.HttpHostConnectException: Connect to 127.0.0.1:4723 [/127.0.0.1] failed: Connection refused: connect
-at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:158)
-at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:353)
-at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:380)
-at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236)
-at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:184)
-at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:88)
-at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110)
-at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184)
-at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:71)
-at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-at org.openqa.selenium.remote.internal.ApacheHttpClient.fallBackExecute(ApacheHttpClient.java:142)
-at org.openqa.selenium.remote.internal.ApacheHttpClient.execute(ApacheHttpClient.java:88)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:108)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:64)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:141)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
-... 33 more
-Caused by: java.net.ConnectException: Connection refused: connect
-at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
-at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
-at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
-at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
-at java.net.PlainSocketImpl.connect(Unknown Source)
-at java.net.SocksSocketImpl.connect(Unknown Source)
-at java.net.Socket.connect(Unknown Source)
-at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:74)
-at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:141)
-... 48 more
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.remote.UnreachableBrowserException -->
+          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Login -->
-        <test-method status="SKIP" signature="teardown()[pri:0, instance:ebayApp.EbayNativeApp@19651f3]" name="teardown" is-config="true" duration-ms="0" started-at="2018-07-11T09:32:30Z" finished-at="2018-07-11T09:32:30Z">
+        <test-method status="SKIP" signature="teardown()[pri:0, instance:ebayApp.EbayNativeApp@57cd70]" name="teardown" is-config="true" duration-ms="0" started-at="2018-07-13T13:06:55Z" finished-at="2018-07-13T13:06:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->
