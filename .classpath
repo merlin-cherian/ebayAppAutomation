@@ -37,6 +37,12 @@
 	<classpathentry kind="lib" path="D:/Appium_Req/SeleniumWebDriver_3.0.1/lib/xalan-2.7.2.jar"/>
 	<classpathentry kind="lib" path="D:/Appium_Req/SeleniumWebDriver_3.0.1/lib/xercesImpl-2.11.0.jar"/>
 	<classpathentry kind="lib" path="D:/Appium_Req/SeleniumWebDriver_3.0.1/lib/xml-apis-1.4.01.jar"/>
-	<classpathentry kind="lib" path="D:/Appium_Req/jar/java-client-2.1.0.jar"/>
+	<classpathentry kind="lib" path="D:/Appium_Req/poi-3.17/poi-3.17.jar"/>
+	<classpathentry kind="lib" path="D:/Appium_Req/poi-3.17/poi-examples-3.17.jar"/>
+	<classpathentry kind="lib" path="D:/Appium_Req/poi-3.17/poi-excelant-3.17.jar"/>
+	<classpathentry kind="lib" path="D:/Appium_Req/poi-3.17/poi-ooxml-3.17.jar"/>
+	<classpathentry kind="lib" path="D:/Appium_Req/poi-3.17/poi-ooxml-schemas-3.17.jar"/>
+	<classpathentry kind="lib" path="D:/Appium_Req/poi-3.17/poi-scratchpad-3.17.jar"/>
+	<classpathentry kind="lib" path="D:/Appium_Req/jar/java-client-5.0.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
