@@ -1,51 +1,79 @@
 package ebayApp;
 
 import io.appium.java_client.android.AndroidDriver;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 
 public class EbayNativeApp {
 	
-	AndroidDriver app;
+	AndroidDriver appDriver;
+    XSSFWorkbook workbook;
+    XSSFSheet sheet;
+    XSSFCell cell;
 	String deviceName = "emulator-5554";
 	String platformName = "Android";
 	String apkPath = "D:\\Appium_Req\\eBay.apk";
 	String appPackage = "com.ebay.mobile";
 	String appActivity = ".activities.eBay";
-	String searchText = "65 inch TV";
+	String inputFilePath = "D:\\workspace\\ebayApp\\data\\InputData.xlsx";
 	
 	@BeforeClass
 	public void Launchapp() throws MalformedURLException, InterruptedException{
 		setCapabilities launch = new setCapabilities();
-		app = launch.setSessionCapabilities(
+		appDriver = launch.setSessionCapabilities(
 				deviceName,platformName,apkPath,appPackage,appActivity);
 
 	}
 	
 	@Test 
-	public void Login(){ 
+	public void Login() throws IOException{ 
+		
+		// Import excel sheet.
+		File src=new File(inputFilePath);
+		FileInputStream finput = new FileInputStream(src);
 		LoginPageObjects page = new LoginPageObjects();
-		app.findElement(By.id(page.getSignInImage()));
-		app.findElementById(page.getSignInImage());
-		app.findElementById(page.getSearchField()).click();
-		app.findElementById(page.getSearchTextBox()).sendKeys(searchText);
-		app.findElementById(page.getSearchButton()).click();
+		appDriver.findElement(By.id(page.getSignInImage()));
+		appDriver.findElementById(page.getSignInImage());
+		appDriver.findElementById(page.getSearchField()).click();
+			
+		 // Load the workbook and data sheet
+		 workbook = new XSSFWorkbook(finput); 
+		 sheet= workbook.getSheetAt(0);
+		 
+		 for(int i=1; i<=sheet.getLastRowNum(); i++)
+		 {
+			 // Import data for Search Text
+			 cell = sheet.getRow(i).getCell(1);
+			 cell.setCellType(Cell.CELL_TYPE_STRING);
+			 System.out.println("data : " + cell.getStringCellValue());
+			 appDriver.findElementById(page.getSearchTextBox()).sendKeys(cell.getStringCellValue());		   		
+	      }
+		
+		appDriver.findElementById(page.getSearchButton()).click();
 		
 		//scroll down
-		app.swipe(0, 30, 0, 60, 2000);
+		appDriver.swipe(0, 30, 0, 60, 2000);
 		
 		//getting info on product search screen
 		ProductScreenObjects pscr = new ProductScreenObjects();
-		String name = app.findElementById(pscr.getNameID()).getText();
+		String name = appDriver.findElementById(pscr.getNameID()).getText();
 		pscr.setName(name);
 		
-		String price = app.findElementById(pscr.getPriceID()).getText();
+		String price = appDriver.findElementById(pscr.getPriceID()).getText();
 		pscr.setName(price);
 		
-		String desc = app.findElementById(pscr.getDescID()).getText();
+		String desc = appDriver.findElementById(pscr.getDescID()).getText();
 		pscr.setName(desc);
 		
 		//Add to cart
@@ -59,6 +87,6 @@ public class EbayNativeApp {
 	public void teardown() throws InterruptedException{
 		//close the app
 		Thread.sleep(1000);
-		app.quit();
+		appDriver.quit();
 	}
 }
