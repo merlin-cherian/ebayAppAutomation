@@ -4,6 +4,7 @@ public class LoginPageObjects {
 	
 	String signInImage = "com.ebay.mobile:id/home_sign_in_image";
 	String searchField = "com.ebay.mobile:id/home_search_text";
+	//com.ebay.mobile:id/search_box
 	String searchTextBox = "android:id/search_src_text";
 	String searchButton = "android:id/search_go_btn";
 	
