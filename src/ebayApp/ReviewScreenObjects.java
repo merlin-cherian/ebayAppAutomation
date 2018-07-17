@@ -1,6 +1,7 @@
 package ebayApp;
 
 public class ReviewScreenObjects {
+	
 	String name;
 	String price;
 	String nameID = "com.ebay.mobile:id/item_title";

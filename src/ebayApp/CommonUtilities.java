@@ -4,6 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 
 public class CommonUtilities {
 
@@ -24,6 +28,11 @@ public class CommonUtilities {
 		}
 		
 		return propertyValue;
+	}
+	
+	public void waitForLoadingPage(AndroidDriver<MobileElement> appDriver)
+	{
+		appDriver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 	}
 		
 }

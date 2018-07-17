@@ -5,7 +5,7 @@ public class ProductScreenObjects {
 	String name;
 	String price;
 	
-		String nameID = "com.ebay.mobile:id/textview_item_name";
+	String nameID = "com.ebay.mobile:id/textview_item_name";
 	String priceID= "com.ebay.mobile:id/textview_item_price";
 	String buyButtonId = "com.ebay.mobile:id/button_bin";
 

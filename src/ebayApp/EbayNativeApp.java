@@ -14,7 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.CapabilityType;
@@ -67,24 +67,24 @@ public class EbayNativeApp {
 		System.out.println("before creating driver");
 		appDriver = new AndroidDriver<MobileElement> (new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		System.out.println("after creating driver");
-		wait = new WebDriverWait(appDriver,30);
 	}
 	
 	@Test 
 	public void Login() throws IOException, InterruptedException{ 
 		
-		ProductScreenObjects pscr = new ProductScreenObjects();
-		ReviewScreenObjects rscr = new ReviewScreenObjects();
-		CommonUtilities common = new CommonUtilities();
-		page = new LoginPageObjects();
-		// Import excel sheet.
 		File src=new File(inputFilePath);
 		FileReader filereader = new FileReader(src);
 		BufferedReader bufferedReader = new BufferedReader(filereader);
-		String line = "";
 		
-		System.out.println("Logging in!");
-		wait.until(ExpectedConditions.elementToBeClickable(By.id(page.getSignInImageId())));
+		page = new LoginPageObjects();
+		ProductScreenObjects pscr = new ProductScreenObjects();
+		ReviewScreenObjects rscr = new ReviewScreenObjects();
+		CommonUtilities common = new CommonUtilities();
+		WebDriverWait wait = new WebDriverWait(appDriver,20);
+	
+		String line = "";
+		common.waitForLoadingPage(appDriver);
+		
 		//click on Options
 		MobileElement options = (MobileElement) appDriver.findElementById(page.getOptionsImageId());
 		options.click();
@@ -99,16 +99,18 @@ public class EbayNativeApp {
 
 		MobileElement signInButton = (MobileElement) appDriver.findElementById(page.getSignInButtonId());
 		signInButton.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(page.getDenyButtonId()))).click();				
+		common.waitForLoadingPage(appDriver);
+		MobileElement denyButtonId = (MobileElement) appDriver.findElementById(page.getDenyButtonId());
+		denyButtonId.click();
+		
 		//Wait for page to load
-		wait.until(ExpectedConditions.elementToBeClickable(By.id(page.getSignInImageId())));
-
+		wait.until(ExpectedConditions.elementToBeClickable(By.id(page.getSearchTextBoxId())));
+		appDriver.findElementById(page.getSearchTextBoxId()).click();
 		
 		while ((line = bufferedReader.readLine()) != null)
 		{
-			System.out.println(line);
-			
-			appDriver.findElementById(page.getSearchTextBoxId()).click();	
+			System.out.println("data : " + line);
+			appDriver.findElementById(page.getSearchBoxId()).clear();
 			appDriver.findElementById(page.getSearchBoxId()).sendKeys(line);
 			appDriver.pressKeyCode(AndroidKeyCode.KEYCODE_ENTER);
 			
@@ -120,7 +122,7 @@ public class EbayNativeApp {
 			new TouchAction((MobileDriver) appDriver).press(PointOption.point(100, 100))
 			.moveTo(PointOption.point(100, 0)).release().perform();
 			
-			appDriver.findElements(By.id("com.ebay.mobile:id/image")).get(1).click();
+			appDriver.findElements(By.id(page.getItemId())).get(1).click();
 
 			//getting info on product search screen
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(pscr.getBuyButtonId())));
@@ -136,11 +138,21 @@ public class EbayNativeApp {
 				String revName = appDriver.findElementById(rscr.getNameID()).getText();		
 				String revPrice = appDriver.findElementById(rscr.getPriceID()).getText();
 				
-				Assert.assertEquals(name, revName);
-				Assert.assertEquals(price,revPrice);
+				//validation of product details
+				Assert.assertFalse(!name.equals(revName));
+				Assert.assertFalse(!price.equals(revPrice));
 				
-				appDriver.navigate().back();
-				appDriver.navigate().back();
+				common.waitForLoadingPage(appDriver);
+				appDriver.findElementById(rscr.getRevButtonId()).click();
+				
+				//closing the page after loading
+				//System.out.println("before closing");
+				common.waitForLoadingPage(appDriver);
+				appDriver.findElementById(page.getOptionsImageId()).click();
+				
+				appDriver.findElementById(page.getSearchButtonId()).click();
+				
+				line = "";
 				
 		 }
 		

@@ -13,7 +13,21 @@ public class LoginPageObjects {
 	String searchTextBoxId = "com.ebay.mobile:id/search_box";
 	String searchBoxId = "com.ebay.mobile:id/search_src_text";
 	String sortId = "com.ebay.mobile:id/button_sort";
+	String itemId = "com.ebay.mobile:id/image";
+	String searchButtonId = "com.ebay.mobile:id/menu_search";
 	
+	public String getSearchButtonId() {
+		return searchButtonId;
+	}
+	public void setSearchButtonId(String searchButtonId) {
+		this.searchButtonId = searchButtonId;
+	}
+	public String getItemId() {
+		return itemId;
+	}
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
+	}
 	public String getSortId() {
 		return sortId;
 	}
