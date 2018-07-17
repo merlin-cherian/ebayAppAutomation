@@ -1,24 +1,27 @@
 package ebayApp;
 
+import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
+import io.appium.java_client.touch.offset.PointOption;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
+
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -38,12 +41,16 @@ public class EbayNativeApp {
 	String apkPath = "D:\\Appium_Req\\eBay.apk";
 	String appPackage = "com.ebay.mobile";
 	String appActivity = ".activities.MainActivity";
-	String inputFilePath = "D:\\workspace\\ebayApp\\data\\InputData.xlsx";
+	String inputFilePath = "data/InputData.txt";
+	LoginPageObjects page;
 	
+	WebDriverWait wait;
+
 	@BeforeClass
 	public void Launchapp() throws MalformedURLException, InterruptedException{
 		
 		DesiredCapabilities capabilities=new DesiredCapabilities();
+				
 		//Platform in which the test is running 
 		capabilities.setCapability(CapabilityType.PLATFORM, "WINDOWS");
 		//Android version of the emulator 
@@ -57,23 +64,27 @@ public class EbayNativeApp {
 		capabilities.setCapability("appPackage",appPackage);
 		capabilities.setCapability("appActivity",appActivity);
 		
-		//Default time the device waits for new command
-		capabilities.setCapability("newCommandTimeout", 60);
 		System.out.println("before creating driver");
 		appDriver = new AndroidDriver<MobileElement> (new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		System.out.println("after creating driver");
+		wait = new WebDriverWait(appDriver,30);
 	}
 	
 	@Test 
 	public void Login() throws IOException, InterruptedException{ 
 		
+		ProductScreenObjects pscr = new ProductScreenObjects();
+		ReviewScreenObjects rscr = new ReviewScreenObjects();
+		CommonUtilities common = new CommonUtilities();
+		page = new LoginPageObjects();
 		// Import excel sheet.
 		File src=new File(inputFilePath);
-		FileInputStream finput = new FileInputStream(src);
-		CommonUtilities common = new CommonUtilities();
-		LoginPageObjects page = new LoginPageObjects();
+		FileReader filereader = new FileReader(src);
+		BufferedReader bufferedReader = new BufferedReader(filereader);
+		String line = "";
 		
 		System.out.println("Logging in!");
+		wait.until(ExpectedConditions.elementToBeClickable(By.id(page.getSignInImageId())));
 		//click on Options
 		MobileElement options = (MobileElement) appDriver.findElementById(page.getOptionsImageId());
 		options.click();
@@ -88,49 +99,49 @@ public class EbayNativeApp {
 
 		MobileElement signInButton = (MobileElement) appDriver.findElementById(page.getSignInButtonId());
 		signInButton.click();
-			
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(page.getDenyButtonId()))).click();				
 		//Wait for page to load
-		WebDriverWait wait = new WebDriverWait(appDriver,30);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id(page.getSignInImageId())));
+
 		
-		// Load the workbook and data sheet
-		 workbook = new XSSFWorkbook(finput); 
-		 sheet= workbook.getSheetAt(0);
-		 
-		 for(int i=0; i<sheet.getLastRowNum(); i++)
-		 {
-			// Import data for Search Text
-			cell = sheet.getRow(i).getCell(1);
-			cell.setCellType(Cell.CELL_TYPE_STRING);
-			System.out.println("data : " + cell.getStringCellValue());
+		while ((line = bufferedReader.readLine()) != null)
+		{
+			System.out.println(line);
 			
 			appDriver.findElementById(page.getSearchTextBoxId()).click();	
-			appDriver.findElementById(page.getSearchBoxId()).sendKeys(cell.getStringCellValue());
+			appDriver.findElementById(page.getSearchBoxId()).sendKeys(line);
 			appDriver.pressKeyCode(AndroidKeyCode.KEYCODE_ENTER);
 			
 			//Wait for Page loading
-			wait(40);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(page.getSortId())));
+
+			//Scrolling down
+			new TouchAction((MobileDriver) appDriver).press(PointOption.point(100, 100));
+			new TouchAction((MobileDriver) appDriver).press(PointOption.point(100, 100))
+			.moveTo(PointOption.point(100, 0)).release().perform();
 			
-			//scroll down
-			JavascriptExecutor js = (JavascriptExecutor) appDriver;
-			HashMap<String,String> scrollObject = new HashMap<String,String>();
-			scrollObject.put("direction", "down");
-			js.executeScript("mobile:scroll", scrollObject);
-			
+			appDriver.findElements(By.id("com.ebay.mobile:id/image")).get(1).click();
+
 			//getting info on product search screen
-//			ProductScreenObjects pscr = new ProductScreenObjects();
-//			String name = appDriver.findElementById(pscr.getNameID()).getText();
-//			pscr.setName(name);
-//			
-//			String price = appDriver.findElementById(pscr.getPriceID()).getText();
-//			pscr.setName(price);
-//			
-//			String desc = appDriver.findElementById(pscr.getDescID()).getText();
-//			pscr.setName(desc);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(pscr.getBuyButtonId())));
+				
+				String name = appDriver.findElementById(pscr.getNameID()).getText();	
+				String price = appDriver.findElementById(pscr.getPriceID()).getText();
 			
 			//Add to cart
-			
+				appDriver.findElementById(pscr.getBuyButtonId()).click();
+				
 			//getting info on checkout screen
+				wait.until(ExpectedConditions.elementToBeClickable(By.id(rscr.getRevButtonId()))); 
+				String revName = appDriver.findElementById(rscr.getNameID()).getText();		
+				String revPrice = appDriver.findElementById(rscr.getPriceID()).getText();
+				
+				Assert.assertEquals(name, revName);
+				Assert.assertEquals(price,revPrice);
+				
+				appDriver.navigate().back();
+				appDriver.navigate().back();
+				
 		 }
 		
 	}

@@ -1,19 +1,17 @@
 package ebayApp;
 
-public class ProductScreenObjects {
-
+public class ReviewScreenObjects {
 	String name;
 	String price;
-	
-		String nameID = "com.ebay.mobile:id/textview_item_name";
+	String nameID = "com.ebay.mobile:id/item_title";
 	String priceID= "com.ebay.mobile:id/textview_item_price";
-	String buyButtonId = "com.ebay.mobile:id/button_bin";
-
-	public String getBuyButtonId() {
-		return buyButtonId;
+	String revButtonId = "com.ebay.mobile:id/take_action";
+	
+	public String getRevButtonId() {
+		return revButtonId;
 	}
-	public void setBuyButtonId(String buyButtonId) {
-		this.buyButtonId = buyButtonId;
+	public void setRevButtonId(String revButtonId) {
+		this.revButtonId = revButtonId;
 	}
 	public String getName() {
 		return name;
@@ -27,7 +25,6 @@ public class ProductScreenObjects {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-
 	public String getNameID() {
 		return nameID;
 	}
@@ -40,5 +37,4 @@ public class ProductScreenObjects {
 	public void setPriceID(String priceID) {
 		this.priceID = priceID;
 	}
-
 }

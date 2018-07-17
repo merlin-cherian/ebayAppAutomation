@@ -14,7 +14,7 @@ public class CommonUtilities {
 		InputStream input = null;
 		
 		try{
-			input = new FileInputStream("login.properties");
+			input = new FileInputStream("C:\\Users\\Core i3\\git\\ebayAutomation\\src\\ebayApp\\login.properties");
 			prop.load(input);
 			propertyValue = prop.getProperty(property);
 		}

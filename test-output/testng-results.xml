@@ -2,62 +2,58 @@
 <testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="136989" started-at="2018-07-14T15:05:07Z" finished-at="2018-07-14T15:07:24Z">
+  <suite name="Default suite" duration-ms="218975" started-at="2018-07-17T15:18:46Z" finished-at="2018-07-17T15:22:25Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="136989" started-at="2018-07-14T15:05:07Z" finished-at="2018-07-14T15:07:24Z">
+    <test name="Default test" duration-ms="218975" started-at="2018-07-17T15:18:46Z" finished-at="2018-07-17T15:22:25Z">
       <class name="ebayApp.EbayNativeApp">
-        <test-method status="PASS" signature="Launchapp()[pri:0, instance:ebayApp.EbayNativeApp@113b13f]" name="Launchapp" is-config="true" duration-ms="85890" started-at="2018-07-14T15:05:07Z" finished-at="2018-07-14T15:06:33Z">
+        <test-method status="PASS" signature="Launchapp()[pri:0, instance:ebayApp.EbayNativeApp@c4039c]" name="Launchapp" is-config="true" duration-ms="166904" started-at="2018-07-17T15:18:47Z" finished-at="2018-07-17T15:21:34Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Launchapp -->
-        <test-method status="FAIL" signature="Login()[pri:0, instance:ebayApp.EbayNativeApp@113b13f]" name="Login" duration-ms="32086" started-at="2018-07-14T15:06:33Z" finished-at="2018-07-14T15:07:05Z">
+        <test-method status="FAIL" signature="Login()[pri:0, instance:ebayApp.EbayNativeApp@c4039c]" name="Login" duration-ms="9658" started-at="2018-07-17T15:21:34Z" finished-at="2018-07-17T15:21:44Z">
           <exception class="org.openqa.selenium.NoSuchElementException">
             <message>
-              <![CDATA[An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 32.07 seconds
+              <![CDATA[An element could not be located on the page using the given search parameters.
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: 'unknown', revision: '1969d75', time: '2016-10-18 09:43:45 -0700'
-System info: host: 'TVMATP95695L', ip: '192.168.8.100', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_111'
+Build info: version: '3.13.0', revision: '2f0d292', time: '2018-06-25T15:32:14.902Z'
+System info: host: 'COREI3-PC', ip: '192.168.8.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_171'
 Driver info: io.appium.java_client.android.AndroidDriver
-Capabilities [{app=D:\Appium_Req\eBay.apk, appPackage=com.ebay.mobile, deviceScreenSize=800x1280, networkConnectionEnabled=true, warnings={}, databaseEnabled=false, version=5.5.1, deviceName=emulator-5554, platform=WINDOWS, deviceUDID=emulator-5554, appActivity=.activities.MainActivity, desired={app=D:\Appium_Req\eBay.apk, appPackage=com.ebay.mobile, appActivity=.activities.MainActivity, newCommandTimeout=60, platformName=Android, version=5.5.1, deviceName=emulator-5554, platform=WINDOWS}, newCommandTimeout=60, platformVersion=5.1.1, webStorageEnabled=false, locationContextEnabled=false, takesScreenshot=true, javascriptEnabled=true, deviceModel=sdk_phone_armv7, platformName=Android, deviceManufacturer=unknown}]
-Session ID: 8e4ffd4c-e9c2-4ba8-9716-3a8123184b0e
-*** Element info: {Using=id, value=com.ebay.mobile:id/home_sign_in_image}]]>
+Capabilities {app: D:\Appium_Req\eBay.apk, appActivity: .activities.MainActivity, appPackage: com.ebay.mobile, databaseEnabled: false, desired: {app: D:\Appium_Req\eBay.apk, appActivity: .activities.MainActivity, appPackage: com.ebay.mobile, deviceName: emulator-5554, platform: WINDOWS, platformName: android, version: 5.5.1}, deviceManufacturer: unknown, deviceModel: Android SDK built for x86, deviceName: emulator-5554, deviceScreenSize: 480x800, deviceUDID: emulator-5554, javascriptEnabled: true, locationContextEnabled: false, networkConnectionEnabled: true, platform: WINDOWS, platformName: Android, platformVersion: 5.1.1, takesScreenshot: true, version: 5.5.1, warnings: {}, webStorageEnabled: false}
+Session ID: 702304ea-8f41-4c5f-8c92-b8a5418f8a3c
+*** Element info: {Using=id, value=com.ebay.mobile:id/home}]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 32.07 seconds
+              <![CDATA[org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters.
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: 'unknown', revision: '1969d75', time: '2016-10-18 09:43:45 -0700'
-System info: host: 'TVMATP95695L', ip: '192.168.8.100', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_111'
+Build info: version: '3.13.0', revision: '2f0d292', time: '2018-06-25T15:32:14.902Z'
+System info: host: 'COREI3-PC', ip: '192.168.8.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_171'
 Driver info: io.appium.java_client.android.AndroidDriver
-Capabilities [{app=D:\Appium_Req\eBay.apk, appPackage=com.ebay.mobile, deviceScreenSize=800x1280, networkConnectionEnabled=true, warnings={}, databaseEnabled=false, version=5.5.1, deviceName=emulator-5554, platform=WINDOWS, deviceUDID=emulator-5554, appActivity=.activities.MainActivity, desired={app=D:\Appium_Req\eBay.apk, appPackage=com.ebay.mobile, appActivity=.activities.MainActivity, newCommandTimeout=60, platformName=Android, version=5.5.1, deviceName=emulator-5554, platform=WINDOWS}, newCommandTimeout=60, platformVersion=5.1.1, webStorageEnabled=false, locationContextEnabled=false, takesScreenshot=true, javascriptEnabled=true, deviceModel=sdk_phone_armv7, platformName=Android, deviceManufacturer=unknown}]
-Session ID: 8e4ffd4c-e9c2-4ba8-9716-3a8123184b0e
-*** Element info: {Using=id, value=com.ebay.mobile:id/home_sign_in_image}
+Capabilities {app: D:\Appium_Req\eBay.apk, appActivity: .activities.MainActivity, appPackage: com.ebay.mobile, databaseEnabled: false, desired: {app: D:\Appium_Req\eBay.apk, appActivity: .activities.MainActivity, appPackage: com.ebay.mobile, deviceName: emulator-5554, platform: WINDOWS, platformName: android, version: 5.5.1}, deviceManufacturer: unknown, deviceModel: Android SDK built for x86, deviceName: emulator-5554, deviceScreenSize: 480x800, deviceUDID: emulator-5554, javascriptEnabled: true, locationContextEnabled: false, networkConnectionEnabled: true, platform: WINDOWS, platformName: Android, platformVersion: 5.1.1, takesScreenshot: true, version: 5.5.1, warnings: {}, webStorageEnabled: false}
+Session ID: 702304ea-8f41-4c5f-8c92-b8a5418f8a3c
+*** Element info: {Using=id, value=com.ebay.mobile:id/home}
 at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
 at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
 at java.lang.reflect.Constructor.newInstance(Unknown Source)
-at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:216)
-at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:168)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:635)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:231)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:548)
 at io.appium.java_client.DefaultGenericMobileDriver.execute(DefaultGenericMobileDriver.java:42)
 at io.appium.java_client.AppiumDriver.execute(AppiumDriver.java:1)
 at io.appium.java_client.android.AndroidDriver.execute(AndroidDriver.java:1)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:368)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:322)
 at io.appium.java_client.DefaultGenericMobileDriver.findElement(DefaultGenericMobileDriver.java:62)
 at io.appium.java_client.AppiumDriver.findElement(AppiumDriver.java:1)
 at io.appium.java_client.android.AndroidDriver.findElement(AndroidDriver.java:1)
-at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:417)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:368)
 at io.appium.java_client.DefaultGenericMobileDriver.findElementById(DefaultGenericMobileDriver.java:70)
 at io.appium.java_client.AppiumDriver.findElementById(AppiumDriver.java:1)
 at io.appium.java_client.android.AndroidDriver.findElementById(AndroidDriver.java:1)
-at org.openqa.selenium.By$ById.findElement(By.java:218)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:360)
-at io.appium.java_client.DefaultGenericMobileDriver.findElement(DefaultGenericMobileDriver.java:58)
-at io.appium.java_client.AppiumDriver.findElement(AppiumDriver.java:1)
-at io.appium.java_client.android.AndroidDriver.findElement(AndroidDriver.java:1)
-at ebayApp.EbayNativeApp.Login(EbayNativeApp.java:67)
+at ebayApp.EbayNativeApp.Login(EbayNativeApp.java:88)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -89,7 +85,7 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Login -->
-        <test-method status="PASS" signature="teardown()[pri:0, instance:ebayApp.EbayNativeApp@113b13f]" name="teardown" is-config="true" duration-ms="18974" started-at="2018-07-14T15:07:05Z" finished-at="2018-07-14T15:07:24Z">
+        <test-method status="PASS" signature="teardown()[pri:0, instance:ebayApp.EbayNativeApp@c4039c]" name="teardown" is-config="true" duration-ms="41469" started-at="2018-07-17T15:21:44Z" finished-at="2018-07-17T15:22:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->

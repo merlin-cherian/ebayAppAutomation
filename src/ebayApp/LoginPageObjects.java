@@ -8,10 +8,24 @@ public class LoginPageObjects {
 	String userNameId = "com.ebay.mobile:id/edit_text_username";
 	String passwordId = "com.ebay.mobile:id/edit_text_password";
 	String signInButtonId = "com.ebay.mobile:id/button_sign_in";
+	String denyButtonId= "com.ebay.mobile:id/button_google_deny";
 	
 	String searchTextBoxId = "com.ebay.mobile:id/search_box";
 	String searchBoxId = "com.ebay.mobile:id/search_src_text";
+	String sortId = "com.ebay.mobile:id/button_sort";
 	
+	public String getSortId() {
+		return sortId;
+	}
+	public void setSortId(String sortId) {
+		this.sortId = sortId;
+	}
+	public String getDenyButtonId() {
+		return denyButtonId;
+	}
+	public void setDenyButtonId(String denyButtonId) {
+		this.denyButtonId = denyButtonId;
+	}
 	public String getOptionsImageId() {
 		return optionsImageId;
 	}
