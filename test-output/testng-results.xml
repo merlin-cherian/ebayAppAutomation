@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="114151" started-at="2018-07-19T06:07:17Z" finished-at="2018-07-19T06:09:11Z">
+  <suite name="Default suite" duration-ms="186070" started-at="2018-07-19T15:22:58Z" finished-at="2018-07-19T15:26:04Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="114151" started-at="2018-07-19T06:07:17Z" finished-at="2018-07-19T06:09:11Z">
+    <test name="Default test" duration-ms="186070" started-at="2018-07-19T15:22:58Z" finished-at="2018-07-19T15:26:04Z">
       <class name="ebayApp.EbayNativeApp">
-        <test-method status="PASS" signature="Launchapp()[pri:0, instance:ebayApp.EbayNativeApp@1fc5af1]" name="Launchapp" is-config="true" duration-ms="18390" started-at="2018-07-19T06:07:17Z" finished-at="2018-07-19T06:07:35Z">
+        <test-method status="PASS" signature="Launchapp()[pri:0, instance:ebayApp.EbayNativeApp@be83e4]" name="Launchapp" is-config="true" duration-ms="27639" started-at="2018-07-19T15:22:58Z" finished-at="2018-07-19T15:23:26Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Launchapp -->
-        <test-method status="PASS" signature="Login()[pri:0, instance:ebayApp.EbayNativeApp@1fc5af1]" name="Login" duration-ms="92266" started-at="2018-07-19T06:07:35Z" finished-at="2018-07-19T06:09:08Z">
+        <test-method status="PASS" signature="Login(java.lang.String)[pri:0, instance:ebayApp.EbayNativeApp@be83e4]" name="Login" duration-ms="77293" started-at="2018-07-19T15:23:26Z" data-provider="InputData" finished-at="2018-07-19T15:24:43Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[sony 65 inch TV]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Login -->
-        <test-method status="PASS" signature="teardown()[pri:0, instance:ebayApp.EbayNativeApp@1fc5af1]" name="teardown" is-config="true" duration-ms="3414" started-at="2018-07-19T06:09:08Z" finished-at="2018-07-19T06:09:11Z">
+        <test-method status="PASS" signature="Login(java.lang.String)[pri:0, instance:ebayApp.EbayNativeApp@be83e4]" name="Login" duration-ms="78307" started-at="2018-07-19T15:24:43Z" data-provider="InputData" finished-at="2018-07-19T15:26:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[LG 65 inch TV]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Login -->
+        <test-method status="PASS" signature="teardown()[pri:0, instance:ebayApp.EbayNativeApp@be83e4]" name="teardown" is-config="true" duration-ms="2730" started-at="2018-07-19T15:26:02Z" finished-at="2018-07-19T15:26:04Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->

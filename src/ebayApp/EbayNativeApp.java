@@ -1,29 +1,22 @@
 package ebayApp;
 
-import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidKeyCode;
-import io.appium.java_client.touch.offset.PointOption;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
+import java.util.ArrayList;
+import java.util.List;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class EbayNativeApp {
@@ -50,15 +43,45 @@ public class EbayNativeApp {
 		capabilities.setCapability("appPackage",common.readProperties("appPackage",CapPrprtyPath));
 		capabilities.setCapability("appActivity",common.readProperties("appActivity",CapPrprtyPath));
 		
-		System.out.println("before creating driver");
+		//System.out.println("before creating driver");
 		appDriver = new AndroidDriver<MobileElement> (new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-		System.out.println("after creating driver");
+		//System.out.println("after creating driver");
 	}
 	
-	@Test 
-	public void Login() throws IOException, InterruptedException{ 
-		
+	@DataProvider(name = "InputData")
+	public static Object[] getFromFile() {
 
+	  File tFile = new File("data/InputData.txt");
+	  FileReader fileReader = null;
+	  List<String> lines = new ArrayList<String>();
+	  try {
+	    String line = null;
+	    fileReader = new FileReader( tFile );
+	    BufferedReader bufferedReader = new BufferedReader( fileReader );
+	    while ((line = bufferedReader.readLine()) != null ) { 
+	      lines.add(line); 
+	    }
+	    bufferedReader.close();
+	  } catch (FileNotFoundException e) {
+	    e.printStackTrace();
+	  } catch (IOException e) {
+	    e.printStackTrace();
+	  }
+	  int testSize = lines.size();
+	  
+	  int i = 0;
+	  Object[] data = new Object[testSize];
+	  for ( String lin : lines ) {
+	    data[i] = lin;
+	    i++;
+	  }
+	  return data;
+	}
+	
+	@Test(dataProvider = "InputData")
+	public void Login(String searchItem) throws IOException, InterruptedException{ 
+		
+		System.out.println(searchItem);
 		WebDriverWait wait = new WebDriverWait(appDriver,20);
 		CommonUtilities common = new CommonUtilities();
 		
@@ -67,9 +90,9 @@ public class EbayNativeApp {
 		//Logging in the application
 		LoginApp login= new LoginApp(appDriver);
 		
-		//Search and Purchse Items
+		//Search and Purchase Items
 		SearchAndPurchaseItem search = new SearchAndPurchaseItem();
-		search.SearchItem(appDriver);
+		search.SearchItem(appDriver,searchItem);
 		
 	}
 	

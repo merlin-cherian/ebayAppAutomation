@@ -9,6 +9,7 @@ public class LoginPageObjects {
 	String passwordId = "com.ebay.mobile:id/edit_text_password";
 	String signInButtonId = "com.ebay.mobile:id/button_sign_in";
 	String denyButtonId= "com.ebay.mobile:id/button_google_deny";
+	String homeButtonId= "com.ebay.mobile:id/design_menu_item_text";
 	
 	String searchTextBoxId = "com.ebay.mobile:id/search_box";
 	String searchBoxId = "com.ebay.mobile:id/search_src_text";
@@ -81,6 +82,12 @@ public class LoginPageObjects {
 	}
 	public void setSearchBoxId(String searchBoxId) {
 		this.searchBoxId = searchBoxId;
+	}
+	public String getHomeButtonId() {
+		return homeButtonId;
+	}
+	public void setHomeButtonId(String homeButtonId) {
+		this.homeButtonId = homeButtonId;
 	}
 
 }
