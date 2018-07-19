@@ -33,36 +33,26 @@ import org.apache.poi.ss.usermodel.Cell;
 public class EbayNativeApp {
 	
 	AndroidDriver<MobileElement> appDriver;
-    XSSFWorkbook workbook;
-    XSSFSheet sheet;
-    XSSFCell cell;
-	String deviceName = "emulator-5554";
-	String platformName = "Android";
-	String apkPath = "D:\\Appium_Req\\eBay.apk";
-	String appPackage = "com.ebay.mobile";
-	String appActivity = ".activities.MainActivity";
-	String inputFilePath = "data/InputData.txt";
+	String CapPrprtyPath = "src/capability.properties";
 	LoginPageObjects page;
-	
-	WebDriverWait wait;
 
 	@BeforeClass
 	public void Launchapp() throws MalformedURLException, InterruptedException{
 		
 		DesiredCapabilities capabilities=new DesiredCapabilities();
-				
+		CommonUtilities common = new CommonUtilities();
 		//Platform in which the test is running 
 		capabilities.setCapability(CapabilityType.PLATFORM, "WINDOWS");
 		//Android version of the emulator 
 		capabilities.setCapability(CapabilityType.VERSION, "5.5.1");
-		capabilities.setCapability("deviceName", deviceName);
-		capabilities.setCapability("platformName", platformName);
+		capabilities.setCapability("deviceName", common.readProperties("deviceName",CapPrprtyPath));
+		capabilities.setCapability("platformName", common.readProperties("platformName",CapPrprtyPath));
 	
 		//Specify fully qualified path of apk file
-		capabilities.setCapability("app", apkPath);
+		capabilities.setCapability("app", common.readProperties("app",CapPrprtyPath));
 		//Specify appPackage and appActivity of the app to be tested
-		capabilities.setCapability("appPackage",appPackage);
-		capabilities.setCapability("appActivity",appActivity);
+		capabilities.setCapability("appPackage",common.readProperties("appPackage",CapPrprtyPath));
+		capabilities.setCapability("appActivity",common.readProperties("appActivity",CapPrprtyPath));
 		
 		System.out.println("before creating driver");
 		appDriver = new AndroidDriver<MobileElement> (new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
@@ -72,89 +62,22 @@ public class EbayNativeApp {
 	@Test 
 	public void Login() throws IOException, InterruptedException{ 
 		
-		File src=new File(inputFilePath);
-		FileReader filereader = new FileReader(src);
-		BufferedReader bufferedReader = new BufferedReader(filereader);
-		
-		page = new LoginPageObjects();
-		ProductScreenObjects pscr = new ProductScreenObjects();
-		ReviewScreenObjects rscr = new ReviewScreenObjects();
-		CommonUtilities common = new CommonUtilities();
-		WebDriverWait wait = new WebDriverWait(appDriver,20);
-	
-		String line = "";
-		common.waitForLoadingPage(appDriver);
-		
-		//click on Options
-		MobileElement options = (MobileElement) appDriver.findElementById(page.getOptionsImageId());
-		options.click();
-		MobileElement signIn = (MobileElement) appDriver.findElementById(page.getSignInImageId());
-		signIn.click();
-		
-		//Enter the credentials and Sign in
-		MobileElement userName = (MobileElement) appDriver.findElementById(page.getUserNameId());
-		userName.sendKeys(common.readProperties("username"));
-		MobileElement password = (MobileElement) appDriver.findElementById(page.getPasswordId());
-		password.sendKeys(common.readProperties("password"));
 
-		MobileElement signInButton = (MobileElement) appDriver.findElementById(page.getSignInButtonId());
-		signInButton.click();
+		WebDriverWait wait = new WebDriverWait(appDriver,20);
+		CommonUtilities common = new CommonUtilities();
+		
 		common.waitForLoadingPage(appDriver);
-		MobileElement denyButtonId = (MobileElement) appDriver.findElementById(page.getDenyButtonId());
-		denyButtonId.click();
+		
+		//Logging in the application
+		LoginApp login= new LoginApp(appDriver);
+		
+		//Searching Items
+		SearchAndPurchaseItem search = new SearchAndPurchaseItem();
+		search.SearchItem(appDriver);
+		search.PurchaseItem(appDriver);
 		
 		//Wait for page to load
 		wait.until(ExpectedConditions.elementToBeClickable(By.id(page.getSearchTextBoxId())));
-		appDriver.findElementById(page.getSearchTextBoxId()).click();
-		
-		while ((line = bufferedReader.readLine()) != null)
-		{
-			System.out.println("data : " + line);
-			appDriver.findElementById(page.getSearchBoxId()).clear();
-			appDriver.findElementById(page.getSearchBoxId()).sendKeys(line);
-			appDriver.pressKeyCode(AndroidKeyCode.KEYCODE_ENTER);
-			
-			//Wait for Page loading
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(page.getSortId())));
-
-			//Scrolling down
-			new TouchAction((MobileDriver) appDriver).press(PointOption.point(100, 100));
-			new TouchAction((MobileDriver) appDriver).press(PointOption.point(100, 100))
-			.moveTo(PointOption.point(100, 0)).release().perform();
-			
-			appDriver.findElements(By.id(page.getItemId())).get(1).click();
-
-			//getting info on product search screen
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(pscr.getBuyButtonId())));
-				
-				String name = appDriver.findElementById(pscr.getNameID()).getText();	
-				String price = appDriver.findElementById(pscr.getPriceID()).getText();
-			
-			//Add to cart
-				appDriver.findElementById(pscr.getBuyButtonId()).click();
-				
-			//getting info on checkout screen
-				wait.until(ExpectedConditions.elementToBeClickable(By.id(rscr.getRevButtonId()))); 
-				String revName = appDriver.findElementById(rscr.getNameID()).getText();		
-				String revPrice = appDriver.findElementById(rscr.getPriceID()).getText();
-				
-				//validation of product details
-				Assert.assertFalse(!name.equals(revName));
-				Assert.assertFalse(!price.equals(revPrice));
-				
-				common.waitForLoadingPage(appDriver);
-				appDriver.findElementById(rscr.getRevButtonId()).click();
-				
-				//closing the page after loading
-				//System.out.println("before closing");
-				common.waitForLoadingPage(appDriver);
-				appDriver.findElementById(page.getOptionsImageId()).click();
-				
-				appDriver.findElementById(page.getSearchButtonId()).click();
-				
-				line = "";
-				
-		 }
 		
 	}
 	

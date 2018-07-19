@@ -11,14 +11,14 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class CommonUtilities {
 
-	public String readProperties(String property)
+	public String readProperties(String property,String src)
 	{
 		Properties prop = new Properties();
 		String propertyValue= "";
 		InputStream input = null;
 		
 		try{
-			input = new FileInputStream("C:\\Users\\Core i3\\git\\ebayAutomation\\src\\ebayApp\\login.properties");
+			input = new FileInputStream(src);
 			prop.load(input);
 			propertyValue = prop.getProperty(property);
 		}
