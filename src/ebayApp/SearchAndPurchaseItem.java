@@ -22,7 +22,6 @@ public class SearchAndPurchaseItem {
 	
 	String inputFilePath = "data/InputData.txt";
 	
-	
 	public void SearchItem(AndroidDriver<MobileElement> appDriver) throws IOException
 	{
 		WebDriverWait wait = new WebDriverWait(appDriver,20);
@@ -49,7 +48,7 @@ public class SearchAndPurchaseItem {
 
 			//Scrolling down
 			new TouchAction((MobileDriver) appDriver).press(PointOption.point(100, 100));
-			new TouchAction((MobileDriver) appDriver).press(PointOption.point(100, 100))
+			new TouchAction((MobileDriver) appDriver).press(PointOption.point(100, 200))
 			.moveTo(PointOption.point(100, 0)).release().perform();
 			
 			appDriver.findElements(By.id(page.getItemId())).get(1).click();
@@ -57,13 +56,13 @@ public class SearchAndPurchaseItem {
 			//getting info on product search screen
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(pscr.getBuyButtonId())));
 
-
-				common.waitForLoadingPage(appDriver);
-				appDriver.findElementById(page.getOptionsImageId()).click();
-				
-				appDriver.findElementById(page.getSearchButtonId()).click();
-				line = "";
+			common.waitForLoadingPage(appDriver);
+			appDriver.findElementById(page.getOptionsImageId()).click();
+			
+			appDriver.findElementById(page.getSearchButtonId()).click();
+			line = "";
 		 }
+		bufferedReader.close();
 	}
 		
 		public void PurchaseItem(AndroidDriver<MobileElement> appDriver)
