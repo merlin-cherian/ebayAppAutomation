@@ -71,13 +71,9 @@ public class EbayNativeApp {
 		//Logging in the application
 		LoginApp login= new LoginApp(appDriver);
 		
-		//Searching Items
+		//Search and Purchse Items
 		SearchAndPurchaseItem search = new SearchAndPurchaseItem();
 		search.SearchItem(appDriver);
-		search.PurchaseItem(appDriver);
-		
-		//Wait for page to load
-		wait.until(ExpectedConditions.elementToBeClickable(By.id(page.getSearchTextBoxId())));
 		
 	}
 	

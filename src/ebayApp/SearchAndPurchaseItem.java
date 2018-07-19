@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -21,6 +22,8 @@ import io.appium.java_client.touch.offset.PointOption;
 public class SearchAndPurchaseItem {
 	
 	String inputFilePath = "data/InputData.txt";
+	ProductScreenObjects pscr;
+	LoginPageObjects page;
 	
 	public void SearchItem(AndroidDriver<MobileElement> appDriver) throws IOException
 	{
@@ -30,8 +33,8 @@ public class SearchAndPurchaseItem {
 		BufferedReader bufferedReader = new BufferedReader(filereader);
 		String line = "";
 		
-		LoginPageObjects page = new LoginPageObjects();
-		ProductScreenObjects pscr = new ProductScreenObjects();
+		page = new LoginPageObjects();
+		pscr = new ProductScreenObjects();
 		CommonUtilities common = new CommonUtilities();
 		
 		appDriver.findElementById(page.getSearchTextBoxId()).click();
@@ -39,6 +42,7 @@ public class SearchAndPurchaseItem {
 		while ((line = bufferedReader.readLine()) != null)
 		{
 			System.out.println("data : " + line);
+			
 			appDriver.findElementById(page.getSearchBoxId()).clear();
 			appDriver.findElementById(page.getSearchBoxId()).sendKeys(line);
 			appDriver.pressKeyCode(AndroidKeyCode.KEYCODE_ENTER);
@@ -47,19 +51,26 @@ public class SearchAndPurchaseItem {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(page.getSortId())));
 
 			//Scrolling down
-			new TouchAction((MobileDriver) appDriver).press(PointOption.point(100, 100));
-			new TouchAction((MobileDriver) appDriver).press(PointOption.point(100, 200))
-			.moveTo(PointOption.point(100, 0)).release().perform();
+			Dimension size = appDriver.manage().window().getSize();
+			int x = size.width / 2;
+			int y = size.height / 2;
+			System.out.println(x + " " + y);
+			new TouchAction((MobileDriver) appDriver).press(PointOption.point(x, y));
+			new TouchAction((MobileDriver) appDriver).press(PointOption.point(x, y))
+			.moveTo(PointOption.point(x, 0)).release();
 			
 			appDriver.findElements(By.id(page.getItemId())).get(1).click();
-
-			//getting info on product search screen
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(pscr.getBuyButtonId())));
-
-			common.waitForLoadingPage(appDriver);
-			appDriver.findElementById(page.getOptionsImageId()).click();
 			
-			appDriver.findElementById(page.getSearchButtonId()).click();
+			//common.waitForLoadingPage(appDriver);
+			String name = appDriver.findElementById(pscr.getNameID()).getText();	
+			String price = appDriver.findElementById(pscr.getPriceID()).getText();
+			
+			System.out.println(name + ",," + price);
+			pscr.setName(name);
+			pscr.setPrice(price);
+	
+			PurchaseItem(appDriver);
+			
 			line = "";
 		 }
 		bufferedReader.close();
@@ -69,18 +80,20 @@ public class SearchAndPurchaseItem {
 		{
 			WebDriverWait wait = new WebDriverWait(appDriver,20);
 			
-			ProductScreenObjects pscr = new ProductScreenObjects();
 			ReviewScreenObjects rscr = new ReviewScreenObjects();
 			CommonUtilities common = new CommonUtilities();
 			
-			String name = appDriver.findElementById(pscr.getNameID()).getText();	
-			String price = appDriver.findElementById(pscr.getPriceID()).getText();
+			String name = pscr.getName();
+			String price = pscr.getPrice();
+			System.out.println(name + ",," + price);
 			
 			//Add to cart
-				appDriver.findElementById(pscr.getBuyButtonId()).click();
+			common.waitForLoadingPage(appDriver);
+				appDriver.findElementById(rscr.getBuyButtonId()).click();
 				
 			//getting info on checkout screen
 				wait.until(ExpectedConditions.elementToBeClickable(By.id(rscr.getRevButtonId()))); 
+				
 				String revName = appDriver.findElementById(rscr.getNameID()).getText();		
 				String revPrice = appDriver.findElementById(rscr.getPriceID()).getText();
 				
@@ -92,7 +105,11 @@ public class SearchAndPurchaseItem {
 				appDriver.findElementById(rscr.getRevButtonId()).click();
 				
 				//Code details for payment options here
+				common.waitForLoadingPage(appDriver);
 				
+				appDriver.findElementById(page.getOptionsImageId()).click();
+				appDriver.findElementById(page.getSearchButtonId()).click();
+
 		}
 
 }

@@ -7,12 +7,19 @@ public class ReviewScreenObjects {
 	String nameID = "com.ebay.mobile:id/item_title";
 	String priceID= "com.ebay.mobile:id/textview_item_price";
 	String revButtonId = "com.ebay.mobile:id/take_action";
+	String buyButtonId = "com.ebay.mobile:id/button_bin";
 	
 	public String getRevButtonId() {
 		return revButtonId;
 	}
 	public void setRevButtonId(String revButtonId) {
 		this.revButtonId = revButtonId;
+	}
+	public String getBuyButtonId() {
+		return buyButtonId;
+	}
+	public void setBuyButtonId(String buyButtonId) {
+		this.buyButtonId = buyButtonId;
 	}
 	public String getName() {
 		return name;
