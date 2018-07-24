@@ -22,6 +22,8 @@ import org.testng.annotations.Test;
 public class EbayNativeApp {
 	
 	AndroidDriver<MobileElement> appDriver;
+	private String sTestCaseName;
+	private int iTestCaseRow;
 	String CapPrprtyPath = "src/capability.properties";
 	LoginPageObjects page;
 
@@ -49,9 +51,9 @@ public class EbayNativeApp {
 	}
 	
 	@DataProvider(name = "InputData")
-	public static Object[] getFromFile() {
+	public Object[] getFromFile() throws Exception {
 
-	  File tFile = new File("data/InputData.txt");
+	/*  File tFile = new File("data/InputData.txt");
 	  FileReader fileReader = null;
 	  List<String> lines = new ArrayList<String>();
 	  try {
@@ -75,14 +77,35 @@ public class EbayNativeApp {
 	    data[i] = lin;
 	    i++;
 	  }
-	  return data;
+	  return data;*/
+	    // Setting up the Test Data Excel file
+		 
+	 	ExcelUtilities.setExcelFile("data/InputData.xlsx","Sheet1");
+ 
+	 	sTestCaseName = this.toString();
+ 
+	  	// From above method we get long test case name including package and class name etc.
+ 
+	  	// The below method will refine your test case name, exactly the name use have used
+ 
+	  	sTestCaseName = ExcelUtilities.getTestCaseName(this.toString());
+ 
+	    // Fetching the Test Case row number from the Test Data Sheet
+ 
+	    // Getting the Test Case name to get the TestCase row from the Test Data Excel sheet
+ 
+	 	iTestCaseRow = ExcelUtilities.getRowContains(sTestCaseName,0);
+ 
+	    Object[] testObjArray = ExcelUtilities.getTableArray("data/InputData.xlsx","Sheet1",iTestCaseRow);
+ 
+	    	return (testObjArray);
+ 
 	}
 	
 	@Test(dataProvider = "InputData")
 	public void Login(String searchItem) throws IOException, InterruptedException{ 
 		
 		System.out.println(searchItem);
-		WebDriverWait wait = new WebDriverWait(appDriver,20);
 		CommonUtilities common = new CommonUtilities();
 		
 		common.waitForLoadingPage(appDriver);
