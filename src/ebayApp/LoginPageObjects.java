@@ -15,8 +15,6 @@ public class LoginPageObjects {
 	String denyButtonId= "com.ebay.mobile:id/button_google_deny";
 	String homeButtonId= "com.ebay.mobile:id/design_menu_item_text";
 	
-
-	
 	public LoginPageObjects(AndroidDriver<MobileElement> driver)
 	{
 		this.appDriver = driver;
