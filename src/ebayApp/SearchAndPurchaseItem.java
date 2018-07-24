@@ -16,35 +16,29 @@ public class SearchAndPurchaseItem {
 	
 	ProductScreenObjects pscr;
 	LoginPageObjects page;
+	SearchObjects search;
 	
 	public void SearchItem(AndroidDriver<MobileElement> appDriver,String searchItem) throws IOException, InterruptedException
 	{
-		WebDriverWait wait = new WebDriverWait(appDriver,20);
+		page = new LoginPageObjects(appDriver);
+		pscr = new ProductScreenObjects(appDriver);
+		search = new SearchObjects(appDriver);
 		
-		page = new LoginPageObjects();
-		pscr = new ProductScreenObjects();
-		CommonUtilities common = new CommonUtilities();
-		
-		appDriver.findElementById(page.getSearchTextBoxId()).click();	
-		appDriver.findElementById(page.getSearchBoxId()).clear();
-		appDriver.findElementById(page.getSearchBoxId()).sendKeys(searchItem);
-		appDriver.pressKeyCode(AndroidKeyCode.KEYCODE_ENTER);
+		//Search for item
+		search.clickOnSearchText();
+		search.clearSearchBox();	
+		search.enterSearchItem(searchItem);
 		
 		//Wait for Page loading
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(page.getSortId())));
+		search.waitForSortId();
+		search.swipeDown();
 
-		int dim[] = common.windowSize(appDriver);
-		int x = dim[0];
-		int y = dim[1];
-		new TouchAction((MobileDriver) appDriver).press(PointOption.point(x, y/2));
-		new TouchAction((MobileDriver) appDriver).press(PointOption.point(x, y))
-		.moveTo(PointOption.point(x, 0)).release();
-		
-		appDriver.findElements(By.id(page.getItemId())).get(1).click();
+		//Click on the item
+		search.clickOnItem();
 		
 		//common.waitForLoadingPage(appDriver);
-		String name = appDriver.findElementById(pscr.getNameID()).getText();	
-		String price = appDriver.findElementById(pscr.getPriceID()).getText();
+		String name = pscr.getItemName();	
+		String price = pscr.getItemPrice();
 		
 		//System.out.println(name + ",," + price);
 		pscr.setName(name);
@@ -55,10 +49,8 @@ public class SearchAndPurchaseItem {
 	}
 		
 	public void PurchaseItem(AndroidDriver<MobileElement> appDriver) throws InterruptedException
-	{
-		WebDriverWait wait = new WebDriverWait(appDriver,20);
-		
-		ReviewScreenObjects rscr = new ReviewScreenObjects();
+	{	
+		ReviewScreenObjects rscr = new ReviewScreenObjects(appDriver);
 		CommonUtilities common = new CommonUtilities();
 		
 		String name = pscr.getName();
@@ -67,13 +59,13 @@ public class SearchAndPurchaseItem {
 		
 		//Add to cart
 		common.waitForLoadingPage(appDriver);
-		appDriver.findElementById(rscr.getBuyButtonId()).click();
+		rscr.clickOnBuyButton();
 			
 		//getting info on checkout screen
-		wait.until(ExpectedConditions.elementToBeClickable(By.id(rscr.getRevButtonId()))); 
+		rscr.waitForReviewButton();
 			
-		String revName = appDriver.findElementById(rscr.getNameID()).getText();		
-		String revPrice = appDriver.findElementById(rscr.getPriceID()).getText();
+		String revName = rscr.getItemName();
+		String revPrice = rscr.getItemPrice();
 			
 		//validation of product details
 		Assert.assertFalse(!name.equals(revName));
@@ -81,19 +73,19 @@ public class SearchAndPurchaseItem {
 		
 		//click on review button
 		common.waitForLoadingPage(appDriver);
-		appDriver.findElementById(rscr.getRevButtonId()).click();
+		rscr.clickOnReviewButton();
 		
 		common.waitForLoadingPage(appDriver);
-		Thread.sleep(15000);
+		//Thread.sleep(15000);
 		
-		if  (appDriver.findElementByAccessibilityId("Proceed to Pay").isDisplayed())
+		if  (rscr.ifPaymentPageDisplayed())
 		{
 			//System.out.println("Payment Details");
 			//Code details for payment options here
 			//closing payment page
-			appDriver.findElementById(page.getOptionsImageId()).click();
+			page.clickOnOptionsImage();
 			//clicking again on options 
-			appDriver.findElementById(page.getOptionsImageId()).click();
+			page.clickOnOptionsImage();
 		}
 		else
 		{

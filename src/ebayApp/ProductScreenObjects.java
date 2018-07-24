@@ -1,13 +1,21 @@
 package ebayApp;
 
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+
 public class ProductScreenObjects {
 
+	AndroidDriver<MobileElement> appDriver;
 	String name;
 	String price;
 	
 	String nameID = "com.ebay.mobile:id/textview_item_name";
 	String priceID= "com.ebay.mobile:id/textview_item_price";
 	
+	public ProductScreenObjects(AndroidDriver<MobileElement> driver)
+	{
+		this.appDriver = driver;
+	}
 
 	public String getName() {
 		return name;
@@ -35,4 +43,15 @@ public class ProductScreenObjects {
 		this.priceID = priceID;
 	}
 
+	public String getItemName()
+	{
+		String itemName = appDriver.findElementById(getNameID()).getText();
+		return itemName;
+	}
+	
+	public String getItemPrice()
+	{
+		String itemPrice = appDriver.findElementById(getPriceID()).getText();
+		return itemPrice;
+	}
 }

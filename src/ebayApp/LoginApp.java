@@ -8,34 +8,35 @@ public class LoginApp {
 	public LoginApp(AndroidDriver<MobileElement> appDriver)
 	{
 		String loginPrprtyPath = "src/login.properties";
-		LoginPageObjects page = new LoginPageObjects();
+		LoginPageObjects page = new LoginPageObjects(appDriver);
 		CommonUtilities common = new CommonUtilities();
 		
 		try
 		{
 			//click on Options
-			MobileElement options = (MobileElement) appDriver.findElementById(page.getOptionsImageId());
-			options.click();
+			page.clickOnOptionsImage();
 			
-			MobileElement signIn = (MobileElement) appDriver.findElementById(page.getSignInImageId());
-			signIn.click();
+			//click on sign in
+			page.clickOnSignInImage();
 			
 			//Enter the credentials and Sign in on first time
-			MobileElement userName = (MobileElement) appDriver.findElementById(page.getUserNameId());
-			userName.sendKeys(common.readProperties("username",loginPrprtyPath));
-			MobileElement password = (MobileElement) appDriver.findElementById(page.getPasswordId());
-			password.sendKeys(common.readProperties("password",loginPrprtyPath));
+			String username = common.readProperties("username",loginPrprtyPath);
+			String password = common.readProperties("password",loginPrprtyPath);
+			
+			page.enterUsername(username);
+			page.enterPassword(password);
 		
-			MobileElement signInButton = (MobileElement) appDriver.findElementById(page.getSignInButtonId());
-			signInButton.click();
+			//click on sign in button
+			page.clickOnSignInButton();
 			common.waitForLoadingPage(appDriver);
-			MobileElement denyButtonId = (MobileElement) appDriver.findElementById(page.getDenyButtonId());
-			denyButtonId.click();
+			//Click on no thanks button
+			page.clickOnDenyButton();
+
 		}
 		catch(Exception e)
 		{
 			//click on home button
-			appDriver.findElementById(page.getHomeButtonId()).click();
+			page.clickOnHomeButton();
 		}
 	}
 	

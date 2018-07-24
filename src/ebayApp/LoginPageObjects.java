@@ -1,7 +1,11 @@
 package ebayApp;
 
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+
 public class LoginPageObjects {
 	
+	AndroidDriver<MobileElement> appDriver;
 	String optionsImageId = "com.ebay.mobile:id/home";
 	String signInImageId ="com.ebay.mobile:id/logo";
 	
@@ -11,30 +15,13 @@ public class LoginPageObjects {
 	String denyButtonId= "com.ebay.mobile:id/button_google_deny";
 	String homeButtonId= "com.ebay.mobile:id/design_menu_item_text";
 	
-	String searchTextBoxId = "com.ebay.mobile:id/search_box";
-	String searchBoxId = "com.ebay.mobile:id/search_src_text";
-	String sortId = "com.ebay.mobile:id/button_sort";
-	String itemId = "com.ebay.mobile:id/image";
-	String searchButtonId = "com.ebay.mobile:id/menu_search";
+
 	
-	public String getSearchButtonId() {
-		return searchButtonId;
+	public LoginPageObjects(AndroidDriver<MobileElement> driver)
+	{
+		this.appDriver = driver;
 	}
-	public void setSearchButtonId(String searchButtonId) {
-		this.searchButtonId = searchButtonId;
-	}
-	public String getItemId() {
-		return itemId;
-	}
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
-	}
-	public String getSortId() {
-		return sortId;
-	}
-	public void setSortId(String sortId) {
-		this.sortId = sortId;
-	}
+	
 	public String getDenyButtonId() {
 		return denyButtonId;
 	}
@@ -71,23 +58,53 @@ public class LoginPageObjects {
 	public void setSignInButtonId(String signInButtonId) {
 		this.signInButtonId = signInButtonId;
 	}
-	public String getSearchTextBoxId() {
-		return searchTextBoxId;
-	}
-	public void setSearchTextBoxId(String searchTextBoxId) {
-		this.searchTextBoxId = searchTextBoxId;
-	}
-	public String getSearchBoxId() {
-		return searchBoxId;
-	}
-	public void setSearchBoxId(String searchBoxId) {
-		this.searchBoxId = searchBoxId;
-	}
+
 	public String getHomeButtonId() {
 		return homeButtonId;
 	}
 	public void setHomeButtonId(String homeButtonId) {
 		this.homeButtonId = homeButtonId;
+	}
+	
+	public void clickOnOptionsImage()
+	{
+		MobileElement options = (MobileElement) appDriver.findElementById(getOptionsImageId());
+		options.click();
+	}
+	
+	public void clickOnSignInImage()
+	{
+		MobileElement signIn = (MobileElement) appDriver.findElementById(getSignInImageId());
+		signIn.click();
+	}
+	
+	public void enterUsername(String username)
+	{
+		MobileElement userName = (MobileElement) appDriver.findElementById(getUserNameId());
+		userName.sendKeys(username);
+	}
+	
+	public void enterPassword(String passwd)
+	{
+		MobileElement password = (MobileElement) appDriver.findElementById(getPasswordId());
+		password.sendKeys(passwd);
+	}
+	
+	public void clickOnSignInButton()
+	{
+		MobileElement signInButton = (MobileElement) appDriver.findElementById(getSignInButtonId());
+		signInButton.click();
+	}
+	
+	public void clickOnDenyButton()
+	{
+		MobileElement denyButtonId = (MobileElement) appDriver.findElementById(getDenyButtonId());
+		denyButtonId.click();
+	}
+	
+	public void clickOnHomeButton()
+	{
+		appDriver.findElementById(getHomeButtonId()).click();
 	}
 
 }
