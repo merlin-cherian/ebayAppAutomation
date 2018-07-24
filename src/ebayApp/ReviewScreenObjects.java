@@ -16,6 +16,8 @@ public class ReviewScreenObjects {
 	String priceID= "com.ebay.mobile:id/textview_item_price";
 	String revButtonId = "com.ebay.mobile:id/take_action";
 	String buyButtonId = "com.ebay.mobile:id/button_bin";
+	String payPage = "Proceed to Pay";
+	CommonUtilities common = new CommonUtilities();
 	
 	public ReviewScreenObjects(AndroidDriver<MobileElement> driver)
 	{
@@ -59,37 +61,43 @@ public class ReviewScreenObjects {
 		this.priceID = priceID;
 	}
 	
+	/*Function to click Buy Button*/
 	public void clickOnBuyButton()
 	{
-		appDriver.findElementById(getBuyButtonId()).click();
+		common.findElementId(appDriver,getBuyButtonId()).click();
 	}
 	
+	/*Function to wait for review button*/
 	public void waitForReviewButton()
 	{
 		WebDriverWait wait = new WebDriverWait(appDriver,20);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id(getRevButtonId()))); 
 	}
 	
+	/*Function to get item name*/
 	public String getItemName()
 	{
-		String itemName = appDriver.findElementById(getNameID()).getText();
+		String itemName = common.findElementId(appDriver,getNameID()).getText();
 		return itemName;
 	}
 	
+	/*Function to get item price*/
 	public String getItemPrice()
 	{
-		String itemPrice = appDriver.findElementById(getPriceID()).getText();
+		String itemPrice = common.findElementId(appDriver,getPriceID()).getText();
 		return itemPrice;
 	}
 	
+	/*Function to click Review Button*/
 	public void clickOnReviewButton()
 	{
-		appDriver.findElementById(getRevButtonId()).click();
+		common.findElementId(appDriver,getRevButtonId()).click();
 	}
 	
+	/*Function to check if payment page is displayed*/
 	public boolean ifPaymentPageDisplayed()
 	{
-		if (appDriver.findElementByAccessibilityId("Proceed to Pay").isDisplayed())
+		if (common.findElementAccess(appDriver,payPage).isDisplayed())
 			return true;
 		else
 			return false;

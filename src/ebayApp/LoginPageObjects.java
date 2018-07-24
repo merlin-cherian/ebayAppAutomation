@@ -15,6 +15,8 @@ public class LoginPageObjects {
 	String denyButtonId= "com.ebay.mobile:id/button_google_deny";
 	String homeButtonId= "com.ebay.mobile:id/design_menu_item_text";
 	
+	CommonUtilities common = new CommonUtilities();
+	
 	public LoginPageObjects(AndroidDriver<MobileElement> driver)
 	{
 		this.appDriver = driver;
@@ -64,45 +66,52 @@ public class LoginPageObjects {
 		this.homeButtonId = homeButtonId;
 	}
 	
+	/*Function to click Options Image*/
 	public void clickOnOptionsImage()
 	{
-		MobileElement options = (MobileElement) appDriver.findElementById(getOptionsImageId());
+		MobileElement options = common.findElementId(appDriver,getOptionsImageId());
 		options.click();
 	}
 	
+	/*Function to click SignIn Image*/
 	public void clickOnSignInImage()
 	{
-		MobileElement signIn = (MobileElement) appDriver.findElementById(getSignInImageId());
+		MobileElement signIn = common.findElementId(appDriver,getSignInImageId());
 		signIn.click();
 	}
 	
+	/*Function to enter username*/
 	public void enterUsername(String username)
 	{
-		MobileElement userName = (MobileElement) appDriver.findElementById(getUserNameId());
+		MobileElement userName = common.findElementId(appDriver,getUserNameId());
 		userName.sendKeys(username);
 	}
 	
+	/*Function to enter password*/
 	public void enterPassword(String passwd)
 	{
-		MobileElement password = (MobileElement) appDriver.findElementById(getPasswordId());
+		MobileElement password = common.findElementId(appDriver,getPasswordId());
 		password.sendKeys(passwd);
 	}
 	
+	/*Function to click Sign In Button*/
 	public void clickOnSignInButton()
 	{
-		MobileElement signInButton = (MobileElement) appDriver.findElementById(getSignInButtonId());
+		MobileElement signInButton = common.findElementId(appDriver,getSignInButtonId());
 		signInButton.click();
 	}
 	
+	/*Function to click No Thanks Image*/
 	public void clickOnDenyButton()
 	{
-		MobileElement denyButtonId = (MobileElement) appDriver.findElementById(getDenyButtonId());
+		MobileElement denyButtonId = common.findElementId(appDriver,getDenyButtonId());
 		denyButtonId.click();
 	}
 	
+	/*Function to click Home Button*/
 	public void clickOnHomeButton()
 	{
-		appDriver.findElementById(getHomeButtonId()).click();
+		common.findElementId(appDriver,getHomeButtonId()).click();
 	}
 
 }

@@ -12,6 +12,8 @@ public class ProductScreenObjects {
 	String nameID = "com.ebay.mobile:id/textview_item_name";
 	String priceID= "com.ebay.mobile:id/textview_item_price";
 	
+	CommonUtilities common = new CommonUtilities();
+	
 	public ProductScreenObjects(AndroidDriver<MobileElement> driver)
 	{
 		this.appDriver = driver;
@@ -43,15 +45,17 @@ public class ProductScreenObjects {
 		this.priceID = priceID;
 	}
 
+	/*Function to get Item name*/
 	public String getItemName()
 	{
-		String itemName = appDriver.findElementById(getNameID()).getText();
+		String itemName = common.findElementId(appDriver,getNameID()).getText();
 		return itemName;
 	}
 	
+	/*Function to get item price*/
 	public String getItemPrice()
 	{
-		String itemPrice = appDriver.findElementById(getPriceID()).getText();
+		String itemPrice = common.findElementId(appDriver,getPriceID()).getText();
 		return itemPrice;
 	}
 }

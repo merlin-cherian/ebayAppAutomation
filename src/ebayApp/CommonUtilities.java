@@ -12,6 +12,7 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class CommonUtilities {
 
+	/*Function to read from Properties file*/
 	public String readProperties(String property,String src)
 	{
 		Properties prop = new Properties();
@@ -31,11 +32,13 @@ public class CommonUtilities {
 		return propertyValue;
 	}
 	
+	/*Function to wait for page to load*/
 	public void waitForLoadingPage(AndroidDriver<MobileElement> appDriver)
 	{
-		appDriver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		appDriver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
 	}
 	
+	/*Function to get the window size*/
 	public int[] windowSize(AndroidDriver<MobileElement> appDriver)
 	{
 		//Getting dimensions of window
@@ -46,6 +49,21 @@ public class CommonUtilities {
 		wSize[0]= x;
 		wSize[1] = y;
 		return wSize;
+	} 
+	
+	/*Functions to wrap the driver functions*/
+	public MobileElement findElementId(AndroidDriver<MobileElement> appDriver,String name)
+	{
+		MobileElement element = (MobileElement)appDriver.findElementById(name);
+		return element;
+		
+	}
+	
+	public MobileElement findElementAccess(AndroidDriver<MobileElement> appDriver,String name)
+	{
+		MobileElement element = (MobileElement)appDriver.findElementByAccessibilityId(name);
+		return element;
+		
 	}
 	
 }

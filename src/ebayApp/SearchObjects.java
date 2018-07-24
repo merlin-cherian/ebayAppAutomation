@@ -20,6 +20,8 @@ public class SearchObjects {
 	String itemId = "com.ebay.mobile:id/image";
 	String searchButtonId = "com.ebay.mobile:id/menu_search";
 	
+	CommonUtilities common = new CommonUtilities();
+	
 	public SearchObjects(AndroidDriver<MobileElement> driver)
 	{
 		this.appDriver = driver;
@@ -57,31 +59,35 @@ public class SearchObjects {
 		this.searchBoxId = searchBoxId;
 	}
 	
+	/*Function to click search text*/
 	public void clickOnSearchText()
 	{
-		appDriver.findElementById(getSearchTextBoxId()).click();
+		common.findElementId(appDriver,getSearchTextBoxId()).click();
 	}
 	
+	/*Function to clear search box*/
 	public void clearSearchBox()
 	{
-		appDriver.findElementById(getSearchBoxId()).clear();
+		common.findElementId(appDriver,getSearchBoxId()).clear();
 	}
 	
+	/*Function to search item*/
 	public void enterSearchItem(String searchItem)
 	{		
-		appDriver.findElementById(getSearchBoxId()).sendKeys(searchItem);
+		common.findElementId(appDriver,getSearchBoxId()).sendKeys(searchItem);
 		appDriver.pressKeyCode(AndroidKeyCode.KEYCODE_ENTER);
 	}
 	
+	/*Function to wait for sort id*/
 	public void waitForSortId()
 	{
 		WebDriverWait wait = new WebDriverWait(appDriver,20);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(getSortId())));
 	}
 	
+	/*Function to swipe down*/
 	public void swipeDown()
 	{
-		CommonUtilities common = new CommonUtilities();
 		int dim[] = common.windowSize(appDriver);
 		int x = dim[0];
 		int y = dim[1];
@@ -90,6 +96,7 @@ public class SearchObjects {
 		.moveTo(PointOption.point(x, 0)).release();
 	}
 	
+	/*Function to click search item*/
 	public void clickOnItem()
 	{
 		appDriver.findElements(By.id(getItemId())).get(1).click();

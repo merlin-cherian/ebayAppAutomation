@@ -45,7 +45,6 @@ public class EbayNativeApp {
 		capabilities.setCapability("appPackage",common.readProperties("appPackage",CapPrprtyPath));
 		capabilities.setCapability("appActivity",common.readProperties("appActivity",CapPrprtyPath));
 		
-		//System.out.println("before creating driver");
 		appDriver = new AndroidDriver<MobileElement> (new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		//System.out.println("after creating driver");
 	}
@@ -53,69 +52,36 @@ public class EbayNativeApp {
 	@DataProvider(name = "InputData")
 	public Object[] getFromFile() throws Exception {
 
-	/*  File tFile = new File("data/InputData.txt");
-	  FileReader fileReader = null;
-	  List<String> lines = new ArrayList<String>();
-	  try {
-	    String line = null;
-	    fileReader = new FileReader( tFile );
-	    BufferedReader bufferedReader = new BufferedReader( fileReader );
-	    while ((line = bufferedReader.readLine()) != null ) { 
-	      lines.add(line); 
-	    }
-	    bufferedReader.close();
-	  } catch (FileNotFoundException e) {
-	    e.printStackTrace();
-	  } catch (IOException e) {
-	    e.printStackTrace();
-	  }
-	  int testSize = lines.size();
-	  
-	  int i = 0;
-	  Object[] data = new Object[testSize];
-	  for ( String lin : lines ) {
-	    data[i] = lin;
-	    i++;
-	  }
-	  return data;*/
 	    // Setting up the Test Data Excel file
 		 
 	 	ExcelUtilities.setExcelFile("data/InputData.xlsx","Sheet1");
- 
 	 	sTestCaseName = this.toString();
- 
+	 	
 	  	// From above method we get long test case name including package and class name etc.
- 
 	  	// The below method will refine your test case name, exactly the name use have used
  
 	  	sTestCaseName = ExcelUtilities.getTestCaseName(this.toString());
  
 	    // Fetching the Test Case row number from the Test Data Sheet
- 
 	    // Getting the Test Case name to get the TestCase row from the Test Data Excel sheet
  
 	 	iTestCaseRow = ExcelUtilities.getRowContains(sTestCaseName,0);
  
 	    Object[] testObjArray = ExcelUtilities.getTableArray("data/InputData.xlsx","Sheet1",iTestCaseRow);
  
-	    	return (testObjArray);
+	    return (testObjArray);
  
 	}
 	
 	@Test(dataProvider = "InputData")
-	public void Login(String searchItem) throws IOException, InterruptedException{ 
-		
-		System.out.println(searchItem);
-		CommonUtilities common = new CommonUtilities();
-		
-		common.waitForLoadingPage(appDriver);
+	public void Login(String searchItemName) throws IOException, InterruptedException{ 
 		
 		//Logging in the application
 		LoginApp login= new LoginApp(appDriver);
 		
 		//Search and Purchase Items
 		SearchAndPurchaseItem search = new SearchAndPurchaseItem();
-		search.SearchItem(appDriver,searchItem);
+		search.SearchItem(appDriver,searchItemName);
 		
 	}
 	

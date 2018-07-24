@@ -20,6 +20,7 @@ public class SearchAndPurchaseItem {
 	
 	public void SearchItem(AndroidDriver<MobileElement> appDriver,String searchItem) throws IOException, InterruptedException
 	{
+		String searchItemName = searchItem;
 		page = new LoginPageObjects(appDriver);
 		pscr = new ProductScreenObjects(appDriver);
 		search = new SearchObjects(appDriver);
@@ -27,7 +28,7 @@ public class SearchAndPurchaseItem {
 		//Search for item
 		search.clickOnSearchText();
 		search.clearSearchBox();	
-		search.enterSearchItem(searchItem);
+		search.enterSearchItem(searchItemName);
 		
 		//Wait for Page loading
 		search.waitForSortId();

@@ -49,43 +49,37 @@ public static Object[] getTableArray(String FilePath, String SheetName, int iTes
 	   ExcelWSheet = ExcelWBook.getSheet(SheetName);
 
 	   int startCol = 1;
-
+	   
 	   int ci=0,cj=0;
 
 	   int totalRows = 1;
 
-	   int totalCols = 2;
+	   int totalCols = 1;
 
 	   tabArray=new String[totalRows];
 
 		   for (int j=startCol;j<=totalCols;j++, cj++)
 
 		   {
-			   tabArray[ci]=getCellData(iTestCaseRow,j);
-			   System.out.println(tabArray[ci]);
+
+			   tabArray[cj]=getCellData(iTestCaseRow,j);
+
+			   System.out.println(tabArray[cj]);
 
 		   }
 
 	}
 
 	catch (FileNotFoundException e)
-
 	{
-
 		System.out.println("Could not read the Excel sheet");
-
 		e.printStackTrace();
-
 	}
 
 	catch (IOException e)
-
 	{
-
 		System.out.println("Could not read the Excel sheet");
-
 		e.printStackTrace();
-
 	}
 
 	return(tabArray);

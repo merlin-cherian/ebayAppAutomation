@@ -9,26 +9,26 @@ public class LoginApp {
 	{
 		String loginPrprtyPath = "src/login.properties";
 		LoginPageObjects page = new LoginPageObjects(appDriver);
-		CommonUtilities common = new CommonUtilities();
 		
 		try
 		{
 			//click on Options
+			page.common.waitForLoadingPage(appDriver);
 			page.clickOnOptionsImage();
 			
 			//click on sign in
 			page.clickOnSignInImage();
 			
 			//Enter the credentials and Sign in on first time
-			String username = common.readProperties("username",loginPrprtyPath);
-			String password = common.readProperties("password",loginPrprtyPath);
+			String username = page.common.readProperties("username",loginPrprtyPath);
+			String password = page.common.readProperties("password",loginPrprtyPath);
 			
 			page.enterUsername(username);
 			page.enterPassword(password);
 		
 			//click on sign in button
 			page.clickOnSignInButton();
-			common.waitForLoadingPage(appDriver);
+			page.common.waitForLoadingPage(appDriver);
 			//Click on no thanks button
 			page.clickOnDenyButton();
 
