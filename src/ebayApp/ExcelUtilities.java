@@ -49,24 +49,26 @@ public static Object[] getTableArray(String FilePath, String SheetName, int iTes
 	   ExcelWSheet = ExcelWBook.getSheet(SheetName);
 
 	   int startCol = 1;
-	   
+	   int startRow = 1;
 	   int ci=0,cj=0;
 
-	   int totalRows = 1;
-
+	   int totalRows = ExcelUtilities.getRowUsed();
 	   int totalCols = 1;
 
 	   tabArray=new String[totalRows];
+	   for (int i=startRow;i<=totalRows;i++, ci++) {           	   
+		   
+		  cj=0;
 
-		   for (int j=startCol;j<=totalCols;j++, cj++)
+		   for (int j=startCol;j<=totalCols;j++, cj++){
 
-		   {
+			   tabArray[ci]=getCellData(i,j);
 
-			   tabArray[cj]=getCellData(iTestCaseRow,j);
+			   //System.out.println(tabArray[ci]);  
 
-			   System.out.println(tabArray[cj]);
+				}
 
-		   }
+			}
 
 	}
 
